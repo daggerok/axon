@@ -1,0 +1,6 @@
+axon.amqp.exchange: ComplaintEvents
+spring:
+  rabbitmq:
+    username: admin
+    password: admin
+debug: true
