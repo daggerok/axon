@@ -1,6 +1,7 @@
 package daggerok.rest;
 
-import daggerok.command.ComplaintCommand;
+import daggerok.cqrs.commands.ComplaintCommand;
+import daggerok.cqrs.commands.DeleteCommand;
 import daggerok.domain.ComplaintQueryObject;
 import daggerok.domain.ComplaintQueryObjectRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,7 @@ public class ComplainsResource {
     }
 
     /**
-     * receiving complaint command
+     * receiving complaint commands
      */
     @PostMapping
     public CompletableFuture<String> fileComplaint(@RequestBody final ComplaintCommand command) {
@@ -37,5 +38,13 @@ public class ComplainsResource {
         // 1:
         return commandGateway.send(ComplaintCommand.of(
                 UUID.randomUUID().toString(), command.getCompany(), command.getDescription()));
+    }
+
+    /**
+     * receiving delete commands
+     */
+    @DeleteMapping("/by/company/{company}")
+    public CompletableFuture<String> deleteByCompany(@PathVariable final String company) {
+        return commandGateway.send(DeleteCommand.of(UUID.randomUUID().toString(), company));
     }
 }

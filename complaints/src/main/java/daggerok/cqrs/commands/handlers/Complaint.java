@@ -1,7 +1,7 @@
-package daggerok.addredate;
+package daggerok.cqrs.commands.handlers;
 
-import daggerok.command.ComplaintCommand;
-import daggerok.event.ComplaintFiledEvent;
+import daggerok.cqrs.commands.ComplaintCommand;
+import daggerok.cqrs.events.ComplaintFiledEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.commandhandling.model.AggregateIdentifier;
@@ -11,7 +11,7 @@ import org.axonframework.spring.stereotype.Aggregate;
 import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
 
 /**
- * Agregade shouldn't modify any field/state of command!
+ * Agregade shouldn't modify any field/state of commands!
  */
 @Slf4j
 @Aggregate
@@ -20,19 +20,19 @@ public class Complaint {
     /**
      * identifier is required: should be initialized on apply:
      *
-     * Aggregate identifier must be non-null after applying an event.
-     * Make sure the aggregate identifier is initialized at the latest when handling the creation event.
+     * Aggregate identifier must be non-null after applying an events.
+     * Make sure the aggregate identifier is initialized at the latest when handling the creation events.
      */
     @AggregateIdentifier
     String identifier;
 
     /**
-     * handling complaint command
+     * handling complaint commands
      */
     @CommandHandler
     public Complaint(ComplaintCommand command) {
 
-        log.info("handling a command: {}", command);
+        log.info("handling a commands: {}", command);
         // 2:
         apply(ComplaintFiledEvent.of(command.getId(), command.getCompany(), command.getDescription()));
     }
