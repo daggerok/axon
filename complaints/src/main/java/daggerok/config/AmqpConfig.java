@@ -1,11 +1,7 @@
 package daggerok.config;
 
-import lombok.val;
 import org.springframework.amqp.core.*;
-import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
-import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,17 +9,6 @@ import org.springframework.context.annotation.Configuration;
 public class AmqpConfig {
 
     final static String NAME = "ComplaintEvents";
-
-    @Bean
-    public ConnectionFactory connectionFactory(ApplicationContext applicationContext) {
-
-        val cachingConnectionFactory = new CachingConnectionFactory();
-
-        cachingConnectionFactory.setUsername("admin");
-        cachingConnectionFactory.setPassword("admin");
-        cachingConnectionFactory.setApplicationContext(applicationContext);
-        return cachingConnectionFactory;
-    }
 
     @Bean
     public Queue queue() {
@@ -43,7 +28,8 @@ public class AmqpConfig {
 
         return BindingBuilder
                 .bind(queue())
-                .to(exchange()).with(NAME)
+//                .to(exchange()).with(NAME)
+                .to(exchange()).with("*")
                 .noargs();
     }
 

@@ -1,4 +1,4 @@
-package daggerok.cqrs.commands;
+package daggerok.commands;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

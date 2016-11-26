@@ -1,7 +1,7 @@
 package daggerok.rest;
 
-import daggerok.cqrs.commands.ComplaintCommand;
-import daggerok.cqrs.commands.DeleteCommand;
+import daggerok.commands.ComplaintCommand;
+import daggerok.commands.DeleteCommand;
 import daggerok.domain.ComplaintQueryObject;
 import daggerok.domain.ComplaintQueryObjectRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +30,7 @@ public class ComplainsResource {
     }
 
     /**
-     * receiving complaint commands
+     * receiving complaint aggregates
      */
     @PostMapping
     public CompletableFuture<String> fileComplaint(@RequestBody final ComplaintCommand command) {
@@ -41,7 +41,7 @@ public class ComplainsResource {
     }
 
     /**
-     * receiving delete commands
+     * receiving delete aggregates
      */
     @DeleteMapping("/by/company/{company}")
     public CompletableFuture<String> deleteByCompany(@PathVariable final String company) {

@@ -1,9 +1,9 @@
-package daggerok.cqrs.events.handlers;
+package daggerok.handlers.updaters;
 
 import daggerok.domain.ComplaintQueryObject;
 import daggerok.domain.ComplaintQueryObjectRepository;
-import daggerok.cqrs.events.ComplaintFiledEvent;
-import daggerok.cqrs.events.DeleteComplaintEvent;
+import daggerok.events.ComplaintFiledEvent;
+import daggerok.events.DeleteComplaintEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.eventhandling.EventHandler;
@@ -17,12 +17,12 @@ public class ComplaintQueryModelUpdater {
     final ComplaintQueryObjectRepository complaintQueryObjectRepository;
 
     /**
-     * saving applied commands-events
+     * saving applied aggregates-updaters
      */
     @EventHandler
     public void handle(ComplaintFiledEvent event) {
 
-        log.info("handling events {}", event);
+        log.info("handling updaters {}", event);
         // 3:
         complaintQueryObjectRepository.save(
                 ComplaintQueryObject.of(event.getId(), event.getCompany(), event.getDescription()));
@@ -31,7 +31,7 @@ public class ComplaintQueryModelUpdater {
     @EventHandler
     public void handle(DeleteComplaintEvent event) {
 
-        log.info("handling deletion events {}", event);
+        log.info("handling deletion updaters {}", event);
         // 3:
         complaintQueryObjectRepository.deleteAllInBatchByCompany(event.getCompany());
     }
