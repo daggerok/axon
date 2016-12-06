@@ -1,0 +1,6 @@
+def axonVersion = '3.0-RC1'
+
+dependencies {
+    compile "org.axonframework:axon-spring-boot-starter:$axonVersion",
+            "org.axonframework:axon-amqp:$axonVersion"
+}

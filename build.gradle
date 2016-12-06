@@ -22,10 +22,12 @@ subprojects {
     repositories { mavenCentral() }
 
     dependencies {
-        compile 'org.springframework.boot:spring-boot-starter-amqp',
-                'org.springframework.boot:spring-boot-starter-data-mongodb',
-                'org.springframework.boot:spring-boot-starter-web'
-        compileOnly 'org.projectlombok:lombok'
+        compile 'org.springframework.boot:spring-boot-starter-data-mongodb',
+                'org.springframework.boot:spring-boot-starter-actuator',
+                'org.springframework.boot:spring-boot-starter-amqp',
+                'org.springframework.boot:spring-boot-starter-web',
+                'org.projectlombok:lombok'
+
         testCompile 'org.springframework.boot:spring-boot-starter-test'
     }
 }
