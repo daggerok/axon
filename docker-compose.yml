@@ -1,0 +1,30 @@
+# http://localhost:8081
+axom-spring-boot-mongo-express:
+  container_name: axom-spring-boot-mongo-express
+  image: mongo-express
+  environment:
+    ME_CONFIG_OPTIONS_EDITORTHEME: ambiance
+    ME_CONFIG_MONGODB_SERVER: axom-spring-boot-mongo
+    ME_CONFIG_SITE_BASEURL: /
+  ports:
+    - "8081:8081"
+  links:
+    - axom-spring-boot-mongo
+axom-spring-boot-mongo:
+  container_name: axom-spring-boot-mongo
+  image: mongo
+  environment:
+    MONGO_PORT_27017_TCP_PORT: 27017
+  ports:
+    - "27017:27017"
+# http://localhost:8082
+axom-spring-boot-rabbitmq:
+   image: rabbitmq:3-management
+   container_name: axom-spring-boot-rabbitmq-admin
+   environment:
+     RABBITMQ_DEFAULT_USER: admin
+     RABBITMQ_DEFAULT_PASS: admin
+   ports:
+     - "5672:5672"
+     - "8082:15672"
+     - "25672:25672"

@@ -1,0 +1,33 @@
+buildscript {
+    repositories { mavenCentral() }
+    dependencies { classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE' }
+}
+
+plugins {
+    id 'idea'
+    id 'eclipse'
+}
+
+allprojects {
+    apply plugin: 'java'
+
+    jar { version = '0.0.1' }
+}
+
+subprojects {
+    apply plugin: 'org.springframework.boot'
+
+    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
+
+    repositories { mavenCentral() }
+
+    dependencies {
+        compile 'org.springframework.boot:spring-boot-starter-amqp',
+                'org.springframework.boot:spring-boot-starter-data-mongodb',
+                'org.springframework.boot:spring-boot-starter-web'
+        compileOnly 'org.projectlombok:lombok'
+        testCompile 'org.springframework.boot:spring-boot-starter-test'
+    }
+}
+
+jar { baseName = 'axon' }
