@@ -1,4 +1,4 @@
-axon [![build](https://travis-ci.org/daggerok/axon.svg?branch=master)](https://travis-ci.org/daggerok/axon)
+axon [![CI](https://github.com/daggerok/axon/actions/workflows/ci.yml/badge.svg)](https://github.com/daggerok/axon/actions/workflows/ci.yml)
 ====
 
 **microservices, cqrs and event sourcing using: spring-boot + axon**:
@@ -15,18 +15,18 @@ axon [![build](https://travis-ci.org/daggerok/axon.svg?branch=master)](https://t
 
 backing services (docker-compose required):
 
-```fish
+```bash
 docker-compose up
 ```
 
 build
 
-```fish
-mvn clean package
+```bash
+./mvnw clean package
 ```
 
 run
 
-```fish
-mvn -pl complaints spring-boot:run
+```bash
+./mvnw -pl complaints spring-boot:run
 ```
